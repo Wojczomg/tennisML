@@ -3,6 +3,15 @@ const brain = require('brain.js');
 const math = require('mathjs');
 import Head from 'next/head'
 import { useState, useEffect, useRef  } from 'react'
+import net10000000 from '../static/nets/net10000000.json'
+import net01000000 from '../static/nets/net01000000.json'
+import net00100000 from '../static/nets/net00100000.json'
+import net00010000 from '../static/nets/net00010000.json'
+import net00001000 from '../static/nets/net00001000.json'
+import net00000100 from '../static/nets/net00000100.json'
+import net00000010 from '../static/nets/net00000010.json'
+import net00000001 from '../static/nets/net00000001.json'
+
 
 
 const Index = props =>{
@@ -449,19 +458,22 @@ async function getEvents() {
         
     }
     console.log(finall);
-    const fs = eval("require('fs')");
+    // const fs = eval("require('fs')");
     let nets = [];
     for (let i of [
-      ['10000000','40:0'],
-      ['01000000','40:15'],
-      ['00100000','40:30'],
-      ['00010000','40:40'],
-      ['00001000','0:40'],
-      ['00000100','15:40'],
-      ['00000010','30:40'],
-      ['00000001','40:40']]){
-      let rawdata = fs.readFileSync(`nets/net${i[0]}.json`);
-      let net1 = JSON.parse(rawdata);
+      [net10000000,'40:0'],
+      [net01000000,'40:15'],
+      [net00100000,'40:30'],
+      [net00010000,'40:40'],
+      [net00001000,'0:40'],
+      [net00000100,'15:40'],
+      [net00000010,'30:40'],
+      [net00000001,'40:40']]){
+      // let rawdata = fs.readFileSync(`nets/net${i[0]}.json`);
+      const rawdata = i[0];
+      // console.log(eval("net10000000"));
+      // let net1 = JSON.parse(rawdata);
+      let net1 = rawdata;
       net1.trainOpts.timeout = Infinity;
       console.log(net1.trainOpts.timeout)
       nets.push([net1,i[1]])
